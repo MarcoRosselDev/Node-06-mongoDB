@@ -7,14 +7,20 @@ const uri = process.env.MONGO_URL;
 // const uri = "<connection string uri>";     --->don
 const client = new MongoClient(uri);
 
+const database = client.db('node-06');
+const airbnb = database.collection('sample_airbnb');
+const dbname = "sample_weatherdata";
+const collection_name = 'data';
+const accountsCollection = client.db(dbname).collection(collection_name);
+
 async function getFirst() {
   try {
-    //await client.connect();
-    const database = client.db('database');
-    const airbnb = database.collection('sample_airbnb');
+    await client.connect();
     //const getData = await airbnb.aggregate([{ $limit: 3 }])
-    const getData = await airbnb.findOne({})
-    console.log(getData);
+    let result = await accountsCollection.findOne()
+    //const getData = await airbnb.findOne()
+    await console.log(result);
+    //console.log(getData);
     //return getData;
   } finally {
     // Ensures that the client will close when you finish/error
