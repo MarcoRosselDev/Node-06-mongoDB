@@ -1,5 +1,6 @@
 {
   "name": "node-06-mongo-db",
+  
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
