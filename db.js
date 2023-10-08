@@ -15,8 +15,17 @@ async function getFirst() {
   try {
     await client.connect();
     //const getData = await airbnb.aggregate([{ $limit: 3 }])
-    let result = await accountsCollection.findOne()
-    await console.log(result);
+    //let result = await accountsCollection.findOne()
+    let result = await accountsCollection.aggregate([
+      {
+        $project: {
+          position: 1
+        }
+      },
+      { $limit: 4 }
+    ])
+    //await result.forEach(er => console.log(er))
+    //await console.log(result);
     return await result;
   } finally {
     // Ensures that the client will close when you finish/error

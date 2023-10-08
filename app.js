@@ -11,7 +11,9 @@ app.get('/api/v1/', async (req, res) => {
   // realizar una peticion a mongodb
   const dateRetrun = await getFirst().catch(console.dir);
   if (dateRetrun) {
-    res.status(200).json(dateRetrun)
+    let send = {}
+    await dateRetrun.forEach(a => send.push(a))
+    res.status(200).json(send)
   } else {
     res.status(404).json({ data: "no se encontro ningun documento" })
   }
