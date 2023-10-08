@@ -7,14 +7,13 @@ app.get('/', (req, res) => {
   res.send('Hello Worldddd!')
 })
 
-app.get('/api/v1/', (req, res) => {
+app.get('/api/v1/', async (req, res) => {
   // realizar una peticion a mongodb
-  const dateRetrun = getFirst().catch(console.dir);
-  //console.log(dateRetrun);
+  const dateRetrun = await getFirst().catch(console.dir);
   if (dateRetrun) {
     res.status(200).json(dateRetrun)
   } else {
-    res.status(404).json({ data: "algo paho" })
+    res.status(404).json({ data: "no se encontro ningun documento" })
   }
 })
 
