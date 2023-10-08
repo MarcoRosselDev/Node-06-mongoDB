@@ -9,21 +9,19 @@ const client = new MongoClient(uri);
 
 async function getFirst() {
   try {
-    const database = client.db('Cluster0');
+    //await client.connect();
+    const database = client.db('database');
     const airbnb = database.collection('sample_airbnb');
-    // Query for a movie that has the title 'Back to the Future'
-    //const query = { title: 'Back to the Future' };
-    //const movie = await movies.findOne(query);
-    //console.log(movie);
-    const get10 = await airbnb.aggregate([{ $limit: 10 }])
-    //console.log(get10);
-    return get10;
-    //console.log(get10);
+    //const getData = await airbnb.aggregate([{ $limit: 3 }])
+    const getData = await airbnb.findOne({})
+    console.log(getData);
+    //return getData;
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
   }
 }
-//run().catch(console.dir);
+
+getFirst().catch(console.dir);
 
 module.exports = getFirst;

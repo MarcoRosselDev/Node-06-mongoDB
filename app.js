@@ -9,9 +9,10 @@ app.get('/', (req, res) => {
 
 app.get('/api/v1/', (req, res) => {
   // realizar una peticion a mongodb
-  const response = getFirst().catch(console.dir);
-  if (response) {
-    res.status(200).json(response)
+  const dateRetrun = getFirst().catch(console.dir);
+  //console.log(dateRetrun);
+  if (dateRetrun) {
+    res.status(200).json(dateRetrun)
   } else {
     res.status(404).json({ data: "algo paho" })
   }
