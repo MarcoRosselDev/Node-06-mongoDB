@@ -1,5 +1,6 @@
 // funcionalidad
 const { MongoClient } = require("mongodb");
+const mongoose = require('mongoose');
 
 require('dotenv').config();
 const uri = process.env.MONGO_URL;
@@ -40,6 +41,14 @@ async function getOne() {
   } finally {
     await client.close()
   }
+}
+
+// para hacer esto importamos nuestro esquema de gatitos
+const { kittySchema } = require('../schema/kittens.js');
+
+const postKitten = async () => {
+  const Kitten = mongoose.model('Kitten', kittySchema);
+  const silence = new Kitten({ name: 'Silence' });
 }
 
 module.exports = {
