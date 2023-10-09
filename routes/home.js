@@ -16,9 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/aggregate', async (req, res) => {
   const dateRetrun = await getFirst().catch(console.dir);
   if (dateRetrun) {
-    let send = {}
-    await dateRetrun.forEach(a => send.push(a))
-    res.status(200).json(send)
+    res.status(200).json(dateRetrun)
   } else {
     res.status(404).json({ data: "no se encontro ningun documento" })
   }
