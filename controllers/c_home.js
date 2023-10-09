@@ -13,7 +13,7 @@ const dbname = "sample_weatherdata";
 const collection_name = 'data';
 const accountsCollection = client.db(dbname).collection(collection_name);
 
-async function getFirst() {
+const getFirst = async (req, res) => {
   try {
     await client.connect();
     let request = await accountsCollection.aggregate([
@@ -23,15 +23,36 @@ async function getFirst() {
         }
       },
       { $limit: 4 }
-    ])
+    ]);
     let response = [];
-    await request.forEach(er => response.push(er))
-    return await response;
+    await request.forEach(er => response.push(er));
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error)
   } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
+    client.close();
   }
 }
+
+// async function getFirst() {
+//   try {
+//     await client.connect();
+//     let request = await accountsCollection.aggregate([
+//       {
+//         $project: {
+//           position: 1
+//         }
+//       },
+//       { $limit: 4 }
+//     ])
+//     let response = [];
+//     await request.forEach(er => response.push(er))
+//     return await response;
+//   } finally {
+//     // Ensures that the client will close when you finish/error
+//     await client.close();
+//   }
+// }
 
 const getOne = async (req, res) => {
 
@@ -44,23 +65,7 @@ const getOne = async (req, res) => {
   } finally {
     client.close();
   }
-  // realizar una peticion a mongodb
-  //   const dateRetrun = await getOne().catch(console.dir);
-  //   if (dateRetrun) {
-  //     res.status(200).json(dateRetrun)
-  //   } else {
-  //     res.status(404).json({ data: 'no se encontro nada' })
-  //   }
 }
-// async function getOne() {
-//   try {
-//     await client.connect();
-//     let result = await accountsCollection.findOne();
-//     return await result;
-//   } finally {
-//     await client.close()
-//   }
-// }
 
 // para hacer esto importamos nuestro esquema de gatitos
 const { kittySchema } = require('../schema/kittens.js');
@@ -73,5 +78,6 @@ const postKitten = async () => {
 
 module.exports = {
   getFirst,
-  getOne
+  getOne,
+  postKitten
 }
