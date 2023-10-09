@@ -33,4 +33,17 @@ async function getFirst() {
   }
 }
 
-module.exports = getFirst;
+async function getOne() {
+  try {
+    await client.connect();
+    let result = await accountsCollection.findOne();
+    return await result;
+  } finally {
+    await client.close()
+  }
+}
+
+module.exports = {
+  getFirst,
+  getOne
+}
