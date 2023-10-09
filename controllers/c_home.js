@@ -33,15 +33,34 @@ async function getFirst() {
   }
 }
 
-async function getOne() {
+const getOne = async (req, res) => {
+
   try {
     await client.connect();
     let result = await accountsCollection.findOne();
-    return await result;
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error)
   } finally {
-    await client.close()
+    client.close();
   }
+  // realizar una peticion a mongodb
+  //   const dateRetrun = await getOne().catch(console.dir);
+  //   if (dateRetrun) {
+  //     res.status(200).json(dateRetrun)
+  //   } else {
+  //     res.status(404).json({ data: 'no se encontro nada' })
+  //   }
 }
+// async function getOne() {
+//   try {
+//     await client.connect();
+//     let result = await accountsCollection.findOne();
+//     return await result;
+//   } finally {
+//     await client.close()
+//   }
+// }
 
 // para hacer esto importamos nuestro esquema de gatitos
 const { kittySchema } = require('../schema/kittens.js');
@@ -49,6 +68,7 @@ const { kittySchema } = require('../schema/kittens.js');
 const postKitten = async () => {
   const Kitten = mongoose.model('Kitten', kittySchema);
   const silence = new Kitten({ name: 'Silence' });
+
 }
 
 module.exports = {
