@@ -4,4 +4,4 @@ const kittySchema = new mongoose.Schema({
   name: String
 });
 
-module.exports = kittySchema;
+module.exports = mongoose.model('Kittie', kittySchema);
