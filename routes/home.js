@@ -1,13 +1,14 @@
 // enrutador de api
 const express = require('express')
 const router = express.Router()
-const { getFirst, getOne, postKitten } = require('../controllers/c_home.js');
+const { getOne, postKitten } = require('../controllers/path.js');
+const { getFirst } = require('../controllers/aggregation.js')
 
-router.get('/', getOne)
+router.get('/', getOne);
+router.post('/', postKitten);
+
 
 router.get('/aggregate', getFirst)
-
-router.post('/', postKitten)
 
 // define the about route
 router.get('/about', (req, res) => {
