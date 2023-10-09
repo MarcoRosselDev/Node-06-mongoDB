@@ -1,7 +1,7 @@
 // enrutador de api
 const express = require('express')
 const router = express.Router()
-const { getFirst, getOne } = require('../db.js');
+const { getFirst, getOne } = require('../controllers/c_home.js');
 
 router.get('/', async (req, res) => {
   // realizar una peticion a mongodb
