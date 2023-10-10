@@ -1,8 +1,7 @@
 // funcionalidad
 const { MongoClient } = require("mongodb");
-const mongoose = require('mongoose');
 // para hacer esto importamos nuestro esquema de gatitos
-const Kitten = require('../schema/kittens.js');
+const Kittie = require('../schema/kittens.js');
 
 require('dotenv').config();
 const uri = process.env.MONGO_URL;
@@ -33,9 +32,8 @@ const postKitten = async (req, res) => {
   console.log(req.body);
   try {
     await client.connect()
-    console.log(req.body.name);
-    //const newKitten = new Kitten({ _id: "1293712asd", name: "mokillo" });
-    const newKitten = { name: "moko" }
+    const newKitten = new Kittie(req.body);
+    //const newKitten = req.body
     const result = await kittenCollection.insertOne(newKitten);
     res.status(201).json(result);
   } catch (error) {
