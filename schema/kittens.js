@@ -1,9 +1,7 @@
-const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const kittySchema = new mongoose.Schema({
-  name: String,
-  lastname: String,
+  name: String
 });
 
 module.exports = mongoose.model('Kittie', kittySchema);

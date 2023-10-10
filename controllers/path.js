@@ -33,8 +33,9 @@ const postKitten = async (req, res) => {
   try {
     await client.connect()
     const newKitten = new Kittie(req.body);
-    //const newKitten = req.body
-    const result = await kittenCollection.insertOne(newKitten);
+    newKitten.$isNew;
+    const result = await kittenCollection.create(newKitten);
+    await newKitten.save()
     res.status(201).json(result);
   } catch (error) {
     console.error(error);
