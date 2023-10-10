@@ -18,7 +18,6 @@ const kittenCollection = client.db("kittens").collection("data");
 
 
 const getOne = async (req, res) => {
-
   try {
     await client.connect();
     let result = await accountsCollection.findOne();
@@ -31,9 +30,10 @@ const getOne = async (req, res) => {
 }
 
 const postKitten = async (req, res) => {
+  console.log(req.body);
   try {
     await client.connect()
-    console.log(req.body);
+    console.log(req.body.name);
     //const newKitten = new Kitten({ _id: "1293712asd", name: "mokillo" });
     const newKitten = { name: "moko" }
     const result = await kittenCollection.insertOne(newKitten);

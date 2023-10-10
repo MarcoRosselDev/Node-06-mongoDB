@@ -3,6 +3,8 @@ const app = express()
 const port = 3000
 const home = require('./routes/home.js')
 
+app.use(express.urlencoded({ extended: false })); // solved bug mongo db
+app.use(express.json());
 app.use('/api/v1', home)
 
 
