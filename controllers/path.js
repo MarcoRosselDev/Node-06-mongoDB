@@ -37,7 +37,7 @@ const postKitten = async (req, res) => {
     await client.connect()
     const newKitten = new Kittie(req.body);//<--- this is with mongoose schema
     //const result = await kittenCollection.create(newKitten); //<---- this is with mongodb driver
-    const kitten = await newKitten.save()//<--- this is = <colecction>.insertOne()
+    const kitten = await newKitten.save()//<--- this is === <colecction>.insertOne()
     res.status(201).json(kitten);
   } catch (error) {
     console.error(error);
