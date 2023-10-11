@@ -19,7 +19,7 @@ const kittenCollection = client.db("kittens").collection("data");
 const getOne = async (req, res) => {
   try {
     await client.connect();
-    let result = await accountsCollection.findOne();
+    let result = await accountsCollection.findOne(); // mongodb driver
     res.status(200).json(result);
   } catch (error) {
     console.error(error)
@@ -30,6 +30,9 @@ const getOne = async (req, res) => {
 
 const postKitten = async (req, res) => {
   console.log(req.body);
+  // we're sending this data to a <test> colecction.kitten, not kittens.data
+  // the nex chanllenge is :
+  //    How can I send the data to an specific collection
   try {
     await client.connect()
     const newKitten = new Kittie(req.body);//<--- this is with mongoose schema
