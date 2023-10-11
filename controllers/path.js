@@ -32,11 +32,10 @@ const postKitten = async (req, res) => {
   console.log(req.body);
   try {
     await client.connect()
-    const newKitten = new Kittie(req.body);
-    newKitten.$isNew;
-    const result = await kittenCollection.create(newKitten);
-    await newKitten.save()
-    res.status(201).json(result);
+    const newKitten = new Kittie(req.body);//<--- this is with mongoose schema
+    //const result = await kittenCollection.create(newKitten); //<---- this is with mongodb driver
+    const kitten = await newKitten.save()//<--- this is = <colecction>.insertOne()
+    res.status(201).json(kitten);
   } catch (error) {
     console.error(error);
   } finally {
